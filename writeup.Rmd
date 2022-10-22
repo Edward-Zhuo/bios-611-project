@@ -1,0 +1,9 @@
+---
+title: "Final report"
+output: pdf_document
+date: "2022-10-22"
+---
+
+![variables](figures/variables.png)
+
+![logistic regression](figures/lm_age.png)

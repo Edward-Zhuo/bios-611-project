@@ -57,8 +57,8 @@ dev.off()
 
 #fit a logistic model with the age variables
 train_test_data <- data %>% mutate(train=runif(nrow(.)) < 0.75)
-train <- train_test_data %>% filter(train) %>% dplyr::select(-train)
-test <- train_test_data %>% filter(!train) %>% dplyr::select(-train)
+train <- train_test_data %>% dplyr::filter(train) %>% dplyr::select(-train)
+test <- train_test_data %>% dplyr::filter(!train) %>% dplyr::select(-train)
 
 logistic_model <- glm(stroke ~ . , family =binomial, data = train);
 

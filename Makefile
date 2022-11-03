@@ -36,5 +36,8 @@ figures/roc.png: .created-dirs data_analysis.R clean_data.csv
 		Rscript data_analysis.R
 
 # Build the final report for the project
-report.pdf: figures/variables.png figures/lm_age.png
+report.pdf: figures/stroke_variables.png \
+	figures/c_variable_distributions.png \
+	figures/d_variable_distributions.png \
+	figures/roc.png
 		R -e "rmarkdown::render(\"writeup.Rmd\", output_format=\"pdf_document\")"

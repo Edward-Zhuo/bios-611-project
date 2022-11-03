@@ -1,6 +1,8 @@
 library(readxl)
 library(tidyverse)
+library(dplyr)
 
+setwd("~/work")
 data <- read.csv("source_data/healthcare-dataset-stroke-data.csv")
 
 #take a look at the data set in general
@@ -36,5 +38,10 @@ table(data$stroke)
 cat(sprintf("%d people in the dataset have stroke, while %d do not.", 
             table(data$stroke)[2],table(data$stroke)[1]), 
     file="data_explore.txt", append = TRUE);
+
+
+#id will not help our analysis, so might as well remove this column
+data <- data %>% dplyr::select(-id)
+
 
 write_csv(data, "clean_data.csv")

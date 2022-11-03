@@ -23,10 +23,16 @@ data_explore.txt: data_explore_clean.R \
 	Rscript data_explore_clean.R
 
 #generated figures for final report to use
-figures/variables.png: .created-dirs data_analysis.R clean_data.csv
+figures/stroke_variables.png: .created-dirs data_analysis.R clean_data.csv
 	Rscript data_analysis.R
 
-figures/lm_age.png: .created-dirs data_analysis.R clean_data.csv
+figures/c_variable_distributions.png: .created-dirs data_analysis.R clean_data.csv
+	Rscript data_analysis.R
+
+figures/d_variable_distributions.png: .created-dirs data_analysis.R clean_data.csv
+	Rscript data_analysis.R
+
+figures/roc.png: .created-dirs data_analysis.R clean_data.csv
 		Rscript data_analysis.R
 
 # Build the final report for the project

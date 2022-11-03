@@ -4,6 +4,7 @@ output: pdf_document
 date: "2022-10-22"
 ---
 
-![variables](figures/variables.png)
-
+![variables](figures/stroke_variables.png)
+![variables](figures/d_variable_distributions.png)
+![variables](figures/c_variable_distributions.png)
 ![logistic regression](figures/lm_age.png)

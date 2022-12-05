@@ -3,7 +3,7 @@ library(ggpubr)
 library(MASS)
 library(PerformanceAnalytics)
 
-setwd(~/work)
+setwd("~/work")
 data <- read.csv("clean_data.csv")
 
 

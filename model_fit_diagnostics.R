@@ -4,7 +4,7 @@ library(caret)
 library(dplyr)
 library(adabag)
 
-setwd(~/work)
+setwd("~/work")
 data <- read.csv("clean_data.csv")
 data <- as.data.frame(unclass(data), stringsAsFactors = TRUE)
 

@@ -3,11 +3,11 @@ Introduction to the dataset and intended analysis
 
 https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset
 
-Stroke, one type of cardiovascular diseases, is a leading cause of long-term disability and death globally. It can be difficult to detect and requires immediate medical attention. Our understanding of cardiovascular diseases is still relatively primitive, and only a relatively limited amount of prevention and intervention methods are available. 
+Stroke, one type of cardiovascular diseases, is a leading cause of long-term disability and death globally. It can be difficult to detect and requires immediate medical attention. Our understanding of cardiovascular diseases is still relatively primitive, and only a relatively limited amount of prevention and intervention methods are available.
 
-The conventional risk factors associated with strokes includes high blood pressure, high cholesterol, diabetes, coronary artery diseases and many other chronic diseases. The chosen dataset contains not only many of these risk factors, but also contains some novel attributes, like marriage status, work types (public, private, or self-employed) and residence types (urban and rural). It would be an interesting exploration to see if these unconventional attributes would have any contribution to predicting one’s likelihood of getting a stoke. 
+The conventional risk factors associated with strokes includes high blood pressure, high cholesterol, diabetes, coronary artery diseases and many other chronic diseases. The chosen dataset contains not only many of these risk factors, but also contains some novel attributes, like marriage status, work types (public, private, or self-employed) and residence types (urban and rural). It is interesting to explore if these unconventional attributes would have any contribution to predicting one’s likelihood of getting a stoke.
 
-An explorative data analysis will be performed first to see the structure of the dataset and the levels of the categorical variable, and clean the dataset if there is any unreasonable outlier observation. Also, data visualization would help us identify strong relationship between the covariates, if any. After performing an initial visualization and data analysis, then it might be possible to find an appropriate statistical model (or maybe machine learning model) to fit the dataset and conduct further analysis. In the likely case that a linear regression model is used, model diagnostics can be used to check if the model assumptions are satisfied, and variable selections can used to pick out the most important covariates in predicting whether a patient is likely to getting a stroke. We can then see if our interesting attributes truly have an influence or not. Finally, we can calculate the coefficient for the linear model and use statistical knowledge to compute confidence intervals for the coefficient. 
+A data cleaning step and explorative data analysis (EDA) will be performed first to see the structure of the dataset, the levels of the discrete (categorical) variables, and the distribution of the continuous variables. Also, data visualization could help to identify strong relationship between the covariates, if any. After performing an initial explorative data analysis and visualization, the dataset is analyzed with Linear Discriminant Analysis, Logistic regression, and AdaBoost. The fit is then compared and discussed.  We can then see if the interesting novel attributes truly have an influence or not.
 
 In summary, it would be an interesting exercise to explore the potential covariates that can predict the likelihood of getting strokes.
 
@@ -25,8 +25,12 @@ contains all the software needed for the project. This allows any user
 with Docker (or a compatible system) to run the code without bothering
 with the often complex task of installing all the required libraries.
 
-Users using a unix-flavor should
-be able to start an RStudio server by running:
+Build the docker image by typing in the terminal:
+```
+docker build . -t 611
+```
+
+Then start an RStudio server by running:
 
 ```
 docker run -v $(pwd):/home/rstudio/work\
@@ -54,7 +58,7 @@ documents for each artifact of interest in the project:
 But a Makefile is more than documentation. Using the _tool_ make
 (included in the Docker container), the Makefile allows for the
 automatic reproduction of an artifact (and all the artifacts which it
-depends on) by simply issueing the command to make it.
+depends on) by simply issuing the command to make it.
 
 Consider this snippet from the Makefile included in this project:
 
@@ -84,10 +88,12 @@ dependencies.
 What to Look At
 ===============
 
-The report/result of this analysis can be produced by invoking the following:
+The report/result of this analysis can be produced by invoking the following
+through the terminal in RStudio:
 
 ```
-make writeup.pdf
+cd work
+make report.pdf
 ```
 
 And this will build the report and any missing dependencies required
@@ -95,3 +101,4 @@ on the way.
 
 Results
 =======
+For our dataset, two of the novel attributes seem to have a significant correlation with the dichotomous stroke outcome during the explorative data analysis stage. The variable selection procedure in logistic regression most often picks some of the conventional variables as important predictors: smoking status(seed 319) heart_disease(seed 295), hypertension, avg_glucose_level, and age, with the last three always being selected. However, for some seeds (seed 359), work type and residence type are also being selected， which indicates those two novel attributes may indeed have some importance in the stroke outcome. This is an interesting result and worth further looking into with larger and more balanced dataset. (The dataset is heavily unbalanced, with only 5% having stroke outcome.) Also, it is worth noting that for analysis of this dataset, the three methods (LDA, Logistic regression, and Adaboost) have similar power in prediction.

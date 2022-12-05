@@ -1,9 +1,10 @@
-library(MASS)
+ library(MASS)
 library(pROC)
 library(caret)
 library(dplyr)
 library(adabag)
 
+setwd(~/work)
 data <- read.csv("clean_data.csv")
 data <- as.data.frame(unclass(data), stringsAsFactors = TRUE)
 
@@ -76,9 +77,8 @@ adaboost_pred <- predict(model, test)
 adaboost_pred$confusion
 adaboost_pred$error
 
-ada_pred_test<-as.numeric(adaboost_pred$class)
 
-roc_adaboost <- roc(test$stroke, ada_pred_test)
+roc_adaboost <- roc(test$stroke, adaboost_pred$prob[,2])
 auc_adaboost <- auc(roc_adaboost)
 
 cat(sprintf("Using adaboost, the auc is %s for the testing set. \n ", 
@@ -91,7 +91,7 @@ png('./figures/roc.png')
 par(mfrow=c(2,2))
 plot(roc_LDA, xlab="False Positive Percentage", ylab="True Positive Percentage", main="LDA ROC")
 plot(roc_logistic, xlab="False Positive Percentage", ylab="True Positive Percentage", main="Logistic ROC")
-#plot(roc_adaboost, xlab="False Positive Percentage", ylab="True Positive Percentage", main="Adaboost ROC")
+plot(roc_adaboost, xlab="False Positive Percentage", ylab="True Positive Percentage", main="Adaboost ROC")
 dev.off()
 
 
